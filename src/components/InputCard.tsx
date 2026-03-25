@@ -9,19 +9,19 @@ interface InputCardProps {
 }
 
 const accents = {
-  indigo: "border-indigo-500/30 bg-indigo-500/5",
-  emerald: "border-emerald-500/30 bg-emerald-500/5",
-  amber: "border-amber-500/30 bg-amber-500/5",
-  rose: "border-rose-500/30 bg-rose-500/5",
-  sky: "border-sky-500/30 bg-sky-500/5",
+  indigo: "border-indigo-200 bg-indigo-50/60",
+  emerald: "border-emerald-200 bg-emerald-50/60",
+  amber: "border-amber-200 bg-amber-50/60",
+  rose: "border-rose-200 bg-rose-50/60",
+  sky: "border-sky-200 bg-sky-50/60",
 };
 
 const iconAccents = {
-  indigo: "bg-indigo-500/20 text-indigo-400",
-  emerald: "bg-emerald-500/20 text-emerald-400",
-  amber: "bg-amber-500/20 text-amber-400",
-  rose: "bg-rose-500/20 text-rose-400",
-  sky: "bg-sky-500/20 text-sky-400",
+  indigo: "bg-indigo-100 text-indigo-600",
+  emerald: "bg-emerald-100 text-emerald-600",
+  amber: "bg-amber-100 text-amber-600",
+  rose: "bg-rose-100 text-rose-600",
+  sky: "bg-sky-100 text-sky-600",
 };
 
 export default function InputCard({ title, subtitle, icon, children, accent = "indigo" }: InputCardProps) {
@@ -32,8 +32,8 @@ export default function InputCard({ title, subtitle, icon, children, accent = "i
           {icon}
         </div>
         <div>
-          <h3 className="font-semibold text-slate-100">{title}</h3>
-          {subtitle && <p className="text-xs text-slate-400 mt-0.5">{subtitle}</p>}
+          <h3 className="font-semibold text-slate-800">{title}</h3>
+          {subtitle && <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>}
         </div>
       </div>
       {children}

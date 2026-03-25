@@ -8,10 +8,10 @@ interface MetricBadgeProps {
 }
 
 const flagStyles = {
-  good: "border-emerald-500/40 bg-emerald-500/10 text-emerald-300",
-  warn: "border-amber-500/40 bg-amber-500/10 text-amber-300",
-  bad: "border-rose-500/40 bg-rose-500/10 text-rose-300",
-  neutral: "border-slate-600 bg-slate-800 text-slate-300",
+  good: "border-emerald-200 bg-emerald-50 text-emerald-700",
+  warn: "border-amber-200 bg-amber-50 text-amber-700",
+  bad: "border-rose-200 bg-rose-50 text-rose-700",
+  neutral: "border-slate-200 bg-white text-slate-700",
 };
 
 const flagIcons = {
@@ -23,10 +23,10 @@ const flagIcons = {
 
 export default function MetricBadge({ label, value, flag = "neutral", size = "sm" }: MetricBadgeProps) {
   return (
-    <div className={`rounded-lg border ${flagStyles[flag]} p-3 flex flex-col gap-1`}>
+    <div className={`rounded-lg border ${flagStyles[flag]} p-3 flex flex-col gap-1 shadow-sm`}>
       <div className="flex items-center gap-1.5">
-        <span className="text-xs font-semibold opacity-60">{flagIcons[flag]}</span>
-        <span className={`${size === "lg" ? "text-base" : "text-xs"} text-slate-400 font-medium`}>{label}</span>
+        <span className="text-xs font-semibold opacity-50">{flagIcons[flag]}</span>
+        <span className={`${size === "lg" ? "text-base" : "text-xs"} text-slate-500 font-medium`}>{label}</span>
       </div>
       <span className={`${size === "lg" ? "text-2xl" : "text-lg"} font-bold tabular-nums`}>{value}</span>
     </div>

@@ -72,24 +72,24 @@ const tabs = ["Calculator", "Repayment Plans", "Scenarios", "Context & Education
 
 const verdictColors = {
   green: {
-    border: "border-emerald-500/40",
-    bg: "bg-emerald-500/10",
-    text: "text-emerald-300",
-    dot: "bg-emerald-400",
+    border: "border-emerald-200",
+    bg: "bg-emerald-50",
+    text: "text-emerald-700",
+    dot: "bg-emerald-500",
     icon: "✓",
   },
   yellow: {
-    border: "border-amber-500/40",
-    bg: "bg-amber-500/10",
-    text: "text-amber-300",
-    dot: "bg-amber-400",
+    border: "border-amber-200",
+    bg: "bg-amber-50",
+    text: "text-amber-700",
+    dot: "bg-amber-500",
     icon: "⚠",
   },
   red: {
-    border: "border-rose-500/40",
-    bg: "bg-rose-500/10",
-    text: "text-rose-300",
-    dot: "bg-rose-400",
+    border: "border-rose-200",
+    bg: "bg-rose-50",
+    text: "text-rose-700",
+    dot: "bg-rose-500",
     icon: "✗",
   },
 };
@@ -122,20 +122,20 @@ export default function Calculator() {
   const vc = verdictColors[verdict.score];
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-50">
       {/* Header */}
-      <div className="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-20">
+      <div className="border-b border-slate-200 bg-white shadow-sm sticky top-0 z-20">
         <div className="max-w-5xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-lg">
+              <div className="w-9 h-9 rounded-xl bg-indigo-100 border border-indigo-200 flex items-center justify-center text-lg">
                 🎓
               </div>
               <div>
-                <h1 className="font-bold text-slate-100 text-base leading-tight">
+                <h1 className="font-bold text-slate-900 text-base leading-tight">
                   OD School Financial Decision Tool
                 </h1>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-400">
                   Built for real decisions, not guesswork
                 </p>
               </div>
@@ -152,7 +152,7 @@ export default function Calculator() {
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-slate-800 bg-slate-950 sticky top-[73px] z-10">
+      <div className="border-b border-slate-200 bg-white sticky top-[73px] z-10">
         <div className="max-w-5xl mx-auto px-4">
           <div className="flex gap-0 overflow-x-auto">
             {tabs.map((t, i) => (
@@ -161,8 +161,8 @@ export default function Calculator() {
                 onClick={() => setTab(i)}
                 className={`px-4 py-3 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${
                   tab === i
-                    ? "border-indigo-500 text-indigo-400"
-                    : "border-transparent text-slate-500 hover:text-slate-300"
+                    ? "border-indigo-500 text-indigo-600"
+                    : "border-transparent text-slate-400 hover:text-slate-700"
                 }`}
               >
                 {t}
@@ -264,9 +264,9 @@ export default function Calculator() {
                   hint="Rent, food, utilities, insurance, etc."
                 />
                 {inputs.myIncome > 0 && inputs.householdExpenses > 0 && (
-                  <div className="rounded-lg bg-slate-800/50 border border-slate-700/40 p-3 space-y-1">
-                    <p className="text-xs text-slate-400">
-                      <span className="font-medium text-slate-300">Monthly surplus (your income only):</span>{" "}
+                  <div className="rounded-lg bg-slate-50 border border-slate-200 p-3 space-y-1">
+                    <p className="text-xs text-slate-600">
+                      <span className="font-medium text-slate-700">Monthly surplus (your income only):</span>{" "}
                       <span
                         className={
                           inputs.myIncome / 12 - inputs.householdExpenses > 0
@@ -277,7 +277,7 @@ export default function Calculator() {
                         {fmt(inputs.myIncome / 12 - inputs.householdExpenses)}/mo
                       </span>
                     </p>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-slate-400">
                       This is what&apos;s left each month for saving, loan payments, and everything else while
                       she&apos;s in school.
                     </p>
@@ -328,8 +328,8 @@ export default function Calculator() {
                   hint="Add up: scholarships + grants + employer/corporate sponsorship + military HPSP + family contribution + savings"
                 />
                 {inputs.fundingOffset > 0 && inputs.schoolCost > 0 && (
-                  <div className="rounded-lg bg-sky-500/10 border border-sky-500/20 p-3">
-                    <p className="text-xs text-sky-300">
+                  <div className="rounded-lg bg-sky-50 border border-sky-200 p-3">
+                    <p className="text-xs text-sky-700">
                       <span className="font-semibold">Net school debt after offsets: </span>
                       {fmt(Math.max(0, inputs.schoolCost - inputs.fundingOffset))}
                       <span className="text-sky-400/60 ml-2">
@@ -399,13 +399,13 @@ export default function Calculator() {
               <div className={`rounded-xl border ${vc.border} ${vc.bg} p-5`}>
                 <div className="flex items-start gap-3">
                   <div
-                    className={`w-10 h-10 rounded-xl border ${vc.border} flex items-center justify-center text-xl flex-shrink-0`}
+                    className={`w-10 h-10 rounded-xl border ${vc.border} ${vc.bg} flex items-center justify-center text-xl flex-shrink-0`}
                   >
                     {vc.icon}
                   </div>
                   <div className="space-y-1 flex-1">
                     <p className={`font-semibold text-base ${vc.text}`}>{verdict.headline}</p>
-                    <p className="text-sm text-slate-400 leading-relaxed">{verdict.summary}</p>
+                    <p className="text-sm text-slate-600 leading-relaxed">{verdict.summary}</p>
                   </div>
                 </div>
                 <div className="mt-4 grid grid-cols-2 sm:grid-cols-5 gap-2">
@@ -421,53 +421,53 @@ export default function Calculator() {
         {/* ═══════════════════════════════ TAB 1: REPAYMENT PLANS ═══════════════════════ */}
         {tab === 1 && (
           <div className="space-y-5">
-            <div className="rounded-xl border border-slate-700/60 bg-slate-900/60 p-5">
-              <h2 className="font-semibold text-slate-100 mb-1">Repayment Strategy Comparison</h2>
-              <p className="text-sm text-slate-400">
+            <div className="rounded-xl border border-slate-200 bg-white shadow-sm p-5">
+              <h2 className="font-semibold text-slate-900 mb-1">Repayment Strategy Comparison</h2>
+              <p className="text-sm text-slate-500">
                 All plans are based on your current inputs. Click any plan to expand its details, pros, and cons.
-                Total debt: <span className="text-indigo-400 font-semibold">{fmt(totalDebt)}</span>
+                Total debt: <span className="text-indigo-600 font-semibold">{fmt(totalDebt)}</span>
               </p>
             </div>
 
             {totalDebt === 0 ? (
-              <div className="rounded-xl border border-slate-700/40 bg-slate-900/40 p-8 text-center">
+              <div className="rounded-xl border border-slate-200 bg-white p-8 text-center">
                 <p className="text-slate-400">Enter debt and salary figures on the Calculator tab to see repayment plans.</p>
               </div>
             ) : (
               <>
                 {/* Amortisation chart */}
                 {chartData.length > 0 && (
-                  <div className="rounded-xl border border-slate-700/60 bg-slate-900/60 p-5">
-                    <h3 className="font-semibold text-slate-100 mb-1">Balance Over Time</h3>
-                    <p className="text-xs text-slate-500 mb-4">How each strategy reduces your balance year by year</p>
+                  <div className="rounded-xl border border-slate-200 bg-white shadow-sm p-5">
+                    <h3 className="font-semibold text-slate-900 mb-1">Balance Over Time</h3>
+                    <p className="text-xs text-slate-400 mb-4">How each strategy reduces your balance year by year</p>
                     <ResponsiveContainer width="100%" height={260}>
                       <AreaChart data={chartData} margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
                         <defs>
                           {[
                             { id: "std", color: "#6366f1" },
                             { id: "ext", color: "#f59e0b" },
-                            { id: "idr", color: "#22d3ee" },
-                            { id: "agg", color: "#34d399" },
+                            { id: "idr", color: "#0ea5e9" },
+                            { id: "agg", color: "#10b981" },
                           ].map(({ id, color }) => (
                             <linearGradient key={id} id={`grad-${id}`} x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="5%" stopColor={color} stopOpacity={0.2} />
+                              <stop offset="5%" stopColor={color} stopOpacity={0.15} />
                               <stop offset="95%" stopColor={color} stopOpacity={0} />
                             </linearGradient>
                           ))}
                         </defs>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                        <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                         <XAxis
                           dataKey="year"
-                          tick={{ fill: "#64748b", fontSize: 11 }}
+                          tick={{ fill: "#94a3b8", fontSize: 11 }}
                           tickFormatter={(v) => `Yr ${v}`}
                         />
                         <YAxis
-                          tick={{ fill: "#64748b", fontSize: 11 }}
+                          tick={{ fill: "#94a3b8", fontSize: 11 }}
                           tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`}
                         />
                         <Tooltip
-                          contentStyle={{ backgroundColor: "#1e293b", border: "1px solid #334155", borderRadius: 8 }}
-                          labelStyle={{ color: "#94a3b8" }}
+                          contentStyle={{ backgroundColor: "#ffffff", border: "1px solid #e2e8f0", borderRadius: 8, boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
+                          labelStyle={{ color: "#64748b" }}
                           // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         formatter={(v: any, name: any) => [
                             fmtUSD(typeof v === "number" ? v : 0),
@@ -483,12 +483,12 @@ export default function Calculator() {
                             v === "extended" ? "Extended 25yr" :
                             v === "idr" ? "IDR/SAVE" : "Aggressive (+$500)"
                           }
-                          wrapperStyle={{ fontSize: 12, color: "#94a3b8" }}
+                          wrapperStyle={{ fontSize: 12, color: "#64748b" }}
                         />
                         <Area type="monotone" dataKey="standard" stroke="#6366f1" fill="url(#grad-std)" strokeWidth={2} />
                         <Area type="monotone" dataKey="extended" stroke="#f59e0b" fill="url(#grad-ext)" strokeWidth={2} />
-                        <Area type="monotone" dataKey="idr" stroke="#22d3ee" fill="url(#grad-idr)" strokeWidth={2} />
-                        <Area type="monotone" dataKey="aggressive" stroke="#34d399" fill="url(#grad-agg)" strokeWidth={2} />
+                        <Area type="monotone" dataKey="idr" stroke="#0ea5e9" fill="url(#grad-idr)" strokeWidth={2} />
+                        <Area type="monotone" dataKey="aggressive" stroke="#10b981" fill="url(#grad-agg)" strokeWidth={2} />
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
@@ -502,14 +502,14 @@ export default function Calculator() {
                 </div>
 
                 {/* Side-by-side comparison table */}
-                <div className="rounded-xl border border-slate-700/60 bg-slate-900/60 overflow-hidden">
-                  <div className="px-5 py-3 border-b border-slate-700/40">
-                    <h3 className="font-semibold text-slate-100">Quick Comparison</h3>
+                <div className="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+                  <div className="px-5 py-3 border-b border-slate-100 bg-slate-50">
+                    <h3 className="font-semibold text-slate-800">Quick Comparison</h3>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="border-b border-slate-700/40">
+                        <tr className="border-b border-slate-100 bg-slate-50/50">
                           <th className="text-left text-xs text-slate-500 font-medium px-4 py-2.5">Strategy</th>
                           <th className="text-right text-xs text-slate-500 font-medium px-4 py-2.5">Monthly</th>
                           <th className="text-right text-xs text-slate-500 font-medium px-4 py-2.5">Total Paid</th>
@@ -520,23 +520,23 @@ export default function Calculator() {
                       </thead>
                       <tbody>
                         {strategies.map((s, i) => (
-                          <tr key={i} className="border-b border-slate-800/60 hover:bg-slate-800/30">
-                            <td className="px-4 py-2.5 text-slate-300 font-medium max-w-[180px]">
+                          <tr key={i} className="border-b border-slate-50 hover:bg-slate-50">
+                            <td className="px-4 py-2.5 text-slate-700 font-medium max-w-[180px]">
                               <span className="truncate block">{s.strategy}</span>
                             </td>
-                            <td className="px-4 py-2.5 text-right text-slate-100 font-semibold tabular-nums">
+                            <td className="px-4 py-2.5 text-right text-slate-900 font-semibold tabular-nums">
                               {fmt(s.monthlyPayment)}
                             </td>
-                            <td className="px-4 py-2.5 text-right text-slate-300 tabular-nums">
+                            <td className="px-4 py-2.5 text-right text-slate-600 tabular-nums">
                               {fmt(s.totalPaid)}
                             </td>
-                            <td className="px-4 py-2.5 text-right text-rose-400 tabular-nums">
+                            <td className="px-4 py-2.5 text-right text-rose-600 tabular-nums">
                               {fmt(s.totalInterest)}
                             </td>
-                            <td className="px-4 py-2.5 text-right text-slate-300 tabular-nums">
+                            <td className="px-4 py-2.5 text-right text-slate-600 tabular-nums">
                               {s.yearsToPayoff}
                             </td>
-                            <td className="px-4 py-2.5 text-right text-emerald-400 tabular-nums">
+                            <td className="px-4 py-2.5 text-right text-emerald-600 tabular-nums">
                               {s.forgiven !== undefined && s.forgiven > 1000 ? fmt(s.forgiven) : "—"}
                             </td>
                           </tr>
@@ -553,9 +553,9 @@ export default function Calculator() {
         {/* ═══════════════════════════════ TAB 2: SCENARIOS ═══════════════════════════ */}
         {tab === 2 && (
           <div className="space-y-5">
-            <div className="rounded-xl border border-slate-700/60 bg-slate-900/60 p-5">
-              <h2 className="font-semibold text-slate-100 mb-1">Decision Scenarios</h2>
-              <p className="text-sm text-slate-400">
+            <div className="rounded-xl border border-slate-200 bg-white shadow-sm p-5">
+              <h2 className="font-semibold text-slate-900 mb-1">Decision Scenarios</h2>
+              <p className="text-sm text-slate-500">
                 Compare the &quot;go now&quot; path against waiting to save, and see a full household budget breakdown.
               </p>
             </div>
@@ -594,10 +594,10 @@ export default function Calculator() {
             {inputs.schoolCost > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Go Now */}
-                <div className="rounded-xl border border-indigo-500/30 bg-indigo-500/5 p-5 space-y-3">
+                <div className="rounded-xl border border-indigo-200 bg-indigo-50 p-5 space-y-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-indigo-400" />
-                    <h3 className="font-semibold text-slate-100">Start Now</h3>
+                    <div className="w-2.5 h-2.5 rounded-full bg-indigo-500" />
+                    <h3 className="font-semibold text-slate-800">Start Now</h3>
                   </div>
                   <div className="space-y-2">
                     {[
@@ -613,18 +613,18 @@ export default function Calculator() {
                       },
                     ].map((row) => (
                       <div key={row.label} className="flex justify-between text-sm">
-                        <span className="text-slate-400">{row.label}</span>
-                        <span className="text-slate-200 font-medium">{row.value}</span>
+                        <span className="text-slate-500">{row.label}</span>
+                        <span className="text-slate-800 font-medium">{row.value}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Wait scenario */}
-                <div className="rounded-xl border border-sky-500/30 bg-sky-500/5 p-5 space-y-3">
+                <div className="rounded-xl border border-sky-200 bg-sky-50 p-5 space-y-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-sky-400" />
-                    <h3 className="font-semibold text-slate-100">
+                    <div className="w-2.5 h-2.5 rounded-full bg-sky-500" />
+                    <h3 className="font-semibold text-slate-800">
                       Wait {inputs.waitYears} Year{inputs.waitYears > 1 ? "s" : ""}
                     </h3>
                   </div>
@@ -644,8 +644,8 @@ export default function Calculator() {
                       },
                     ].map((row) => (
                       <div key={row.label} className="flex justify-between text-sm">
-                        <span className="text-slate-400">{row.label}</span>
-                        <span className="text-slate-200 font-medium">{row.value}</span>
+                        <span className="text-slate-500">{row.label}</span>
+                        <span className="text-slate-800 font-medium">{row.value}</span>
                       </div>
                     ))}
                   </div>
@@ -662,20 +662,20 @@ export default function Calculator() {
                     : "border-rose-500/30 bg-rose-500/5"
                 }`}
               >
-                <h3 className="font-semibold text-slate-100 mb-3">Opportunity Cost Analysis</h3>
+                <h3 className="font-semibold text-slate-800 mb-3">Opportunity Cost Analysis</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-slate-400">OD salary foregone while waiting ({inputs.waitYears} yr{inputs.waitYears > 1 ? "s" : ""}):</span>
-                    <span className="text-rose-400 font-semibold">{fmt(waitScenario.opportunityCostDelay)}</span>
+                    <span className="text-slate-600">OD salary foregone while waiting ({inputs.waitYears} yr{inputs.waitYears > 1 ? "s" : ""}):</span>
+                    <span className="text-rose-600 font-semibold">{fmt(waitScenario.opportunityCostDelay)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">Interest saved by borrowing less:</span>
-                    <span className="text-emerald-400 font-semibold">
+                    <span className="text-slate-600">Interest saved by borrowing less:</span>
+                    <span className="text-emerald-600 font-semibold">
                       {fmt(Math.max(0, (strategies[0]?.totalInterest ?? 0) - waitScenario.totalInterestAfter))}
                     </span>
                   </div>
-                  <div className="border-t border-slate-700/40 pt-2 flex justify-between">
-                    <span className="text-slate-300 font-semibold">Net financial impact of waiting:</span>
+                  <div className="border-t border-slate-200 pt-2 flex justify-between">
+                    <span className="text-slate-700 font-semibold">Net financial impact of waiting:</span>
                     <span
                       className={`font-bold text-base ${
                         waitScenario.netBenefit > 0 ? "text-emerald-400" : "text-rose-400"
@@ -686,7 +686,7 @@ export default function Calculator() {
                     </span>
                   </div>
                 </div>
-                <p className="text-xs text-slate-500 mt-3">
+                <p className="text-xs text-slate-500 mt-3 leading-relaxed">
                   {waitScenario.netBenefit < 0
                     ? "Starting now is financially better. The salary you'd earn as an OD during the waiting period far exceeds the interest savings from borrowing less."
                     : "Waiting generates a net financial benefit — though this must be weighed against career timing, personal readiness, and the cost of delaying career launch."}
@@ -696,9 +696,9 @@ export default function Calculator() {
 
             {/* Budget in school */}
             {inputs.myIncome > 0 && inputs.householdExpenses > 0 && (
-              <div className="rounded-xl border border-slate-700/60 bg-slate-900/60 p-5">
-                <h3 className="font-semibold text-slate-100 mb-3">Household Budget During School</h3>
-                <p className="text-xs text-slate-500 mb-3">
+              <div className="rounded-xl border border-slate-200 bg-white shadow-sm p-5">
+                <h3 className="font-semibold text-slate-800 mb-3">Household Budget During School</h3>
+                <p className="text-xs text-slate-400 mb-3">
                   Your income carries the household. This shows whether that&apos;s feasible.
                 </p>
                 <div className="space-y-2">
@@ -706,13 +706,13 @@ export default function Calculator() {
                     {
                       label: "Your monthly income",
                       value: inputs.myIncome / 12,
-                      color: "text-emerald-400",
+                      color: "text-emerald-600",
                       isPositive: true,
                     },
                     {
                       label: "Household expenses",
                       value: -inputs.householdExpenses,
-                      color: "text-rose-400",
+                      color: "text-rose-600",
                       isPositive: false,
                     },
                     {
@@ -720,24 +720,24 @@ export default function Calculator() {
                       value: inputs.myIncome / 12 - inputs.householdExpenses,
                       color:
                         inputs.myIncome / 12 - inputs.householdExpenses >= 0
-                          ? "text-emerald-400"
-                          : "text-rose-400",
+                          ? "text-emerald-600"
+                          : "text-rose-600",
                       isPositive: inputs.myIncome / 12 - inputs.householdExpenses >= 0,
                       bold: true,
                     },
                   ].map((row) => (
                     <div
                       key={row.label}
-                      className={`flex justify-between text-sm ${row.bold ? "border-t border-slate-700/40 pt-2 font-semibold" : ""}`}
+                      className={`flex justify-between text-sm ${row.bold ? "border-t border-slate-100 pt-2 font-semibold" : ""}`}
                     >
-                      <span className="text-slate-400">{row.label}</span>
+                      <span className="text-slate-500">{row.label}</span>
                       <span className={row.color}>{fmt(Math.abs(row.value))}/mo</span>
                     </div>
                   ))}
                 </div>
                 {inputs.myIncome / 12 < inputs.householdExpenses && (
-                  <div className="mt-3 rounded-lg bg-rose-500/10 border border-rose-500/20 p-3">
-                    <p className="text-xs text-rose-300">
+                  <div className="mt-3 rounded-lg bg-rose-50 border border-rose-200 p-3">
+                    <p className="text-xs text-rose-700">
                       ⚠ Your income alone doesn&apos;t fully cover current household expenses.
                       You&apos;ll need to reduce expenses, supplement with her part-time work, or draw on savings during school.
                     </p>
@@ -748,9 +748,9 @@ export default function Calculator() {
 
             {/* Funding offset scenarios */}
             {inputs.schoolCost > 0 && (
-              <div className="rounded-xl border border-slate-700/60 bg-slate-900/60 p-5">
-                <h3 className="font-semibold text-slate-100 mb-1">Funding Offset Impact</h3>
-                <p className="text-xs text-slate-500 mb-4">
+              <div className="rounded-xl border border-slate-200 bg-white shadow-sm p-5">
+                <h3 className="font-semibold text-slate-800 mb-1">Funding Offset Impact</h3>
+                <p className="text-xs text-slate-400 mb-4">
                   How much does each additional $10k of scholarships/grants/sponsorship save you over a 10-year loan?
                 </p>
                 <div className="space-y-2">
@@ -765,8 +765,8 @@ export default function Calculator() {
                         key={offset}
                         className={`flex justify-between items-center text-xs rounded-lg px-3 py-2 ${
                           isCurrentOffset
-                            ? "bg-indigo-500/20 border border-indigo-500/30 text-slate-200"
-                            : "bg-slate-800/40 text-slate-400"
+                            ? "bg-indigo-50 border border-indigo-200 text-indigo-900"
+                            : "bg-slate-50 border border-slate-100 text-slate-500"
                         }`}
                       >
                         <span className="font-medium">
@@ -789,9 +789,9 @@ export default function Calculator() {
       </div>
 
       {/* Footer */}
-      <div className="border-t border-slate-800 mt-8">
+      <div className="border-t border-slate-200 mt-8 bg-white">
         <div className="max-w-5xl mx-auto px-4 py-4">
-          <p className="text-xs text-slate-600 text-center">
+          <p className="text-xs text-slate-400 text-center">
             For educational purposes only — not financial advice. Consult a licensed financial advisor
             before making major financial decisions.
           </p>

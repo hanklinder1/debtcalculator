@@ -8,12 +8,12 @@ interface Section {
 
 function SectionBlock({ title, icon, content }: Section) {
   return (
-    <div className="rounded-xl border border-slate-700/60 bg-slate-900/60 overflow-hidden">
-      <div className="px-5 py-4 border-b border-slate-700/40 flex items-center gap-3">
+    <div className="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+      <div className="px-5 py-4 border-b border-slate-100 flex items-center gap-3 bg-slate-50">
         <span className="text-xl">{icon}</span>
-        <h3 className="font-semibold text-slate-100">{title}</h3>
+        <h3 className="font-semibold text-slate-800">{title}</h3>
       </div>
-      <div className="px-5 py-4 text-sm text-slate-400 leading-relaxed space-y-3">{content}</div>
+      <div className="px-5 py-4 text-sm text-slate-600 leading-relaxed space-y-3">{content}</div>
     </div>
   );
 }
@@ -22,9 +22,9 @@ export default function ContextPage() {
   return (
     <div className="space-y-5">
       {/* Header */}
-      <div className="rounded-xl border border-indigo-500/30 bg-indigo-500/5 p-5">
-        <h2 className="text-lg font-semibold text-slate-100 mb-2">Understanding Your Decision</h2>
-        <p className="text-sm text-slate-400 leading-relaxed">
+      <div className="rounded-xl border border-indigo-200 bg-indigo-50 p-5">
+        <h2 className="text-lg font-semibold text-indigo-900 mb-2">Understanding Your Decision</h2>
+        <p className="text-sm text-indigo-700 leading-relaxed">
           This page explains every concept used in the calculator — what each repayment strategy is,
           how financial metrics are calculated, what to look out for, and how to think about this
           decision as a couple. Read this before you run the numbers.
@@ -38,7 +38,7 @@ export default function ContextPage() {
         content={
           <div className="space-y-4">
             <div>
-              <p className="font-semibold text-slate-200 mb-1">Standard 10-Year Repayment</p>
+              <p className="font-semibold text-slate-800 mb-1">Standard 10-Year Repayment</p>
               <p>
                 The default federal plan. Fixed monthly payments over 10 years. You pay the least total
                 interest of any plan because you&apos;re paying down principal quickly. Best for borrowers
@@ -46,7 +46,7 @@ export default function ContextPage() {
               </p>
             </div>
             <div>
-              <p className="font-semibold text-slate-200 mb-1">Extended 25-Year Repayment</p>
+              <p className="font-semibold text-slate-800 mb-1">Extended 25-Year Repayment</p>
               <p>
                 Stretches payments over 25 years, lowering the monthly burden but dramatically increasing
                 total interest paid. Use this only if cash flow is genuinely tight and you need room to
@@ -54,7 +54,7 @@ export default function ContextPage() {
               </p>
             </div>
             <div>
-              <p className="font-semibold text-slate-200 mb-1">SAVE Plan (Income-Driven Repayment)</p>
+              <p className="font-semibold text-slate-800 mb-1">SAVE Plan (Income-Driven Repayment)</p>
               <p>
                 Saving on a Valuable Education (SAVE) is the newest IDR plan. Payments are based on
                 10% of your discretionary income (AGI minus ~225% of the federal poverty line). A key
@@ -65,14 +65,14 @@ export default function ContextPage() {
               </p>
             </div>
             <div>
-              <p className="font-semibold text-slate-200 mb-1">PSLF — Public Service Loan Forgiveness</p>
+              <p className="font-semibold text-slate-800 mb-1">PSLF — Public Service Loan Forgiveness</p>
               <p>
                 One of the most powerful tools available. Work for a qualifying employer — federal, state, or
                 local government, or a 501(c)(3) nonprofit — make 120 qualifying payments (10 years) on an
-                IDR plan, and the remaining balance is forgiven <strong className="text-emerald-400">tax-free</strong>.
+                IDR plan, and the remaining balance is forgiven <strong className="text-emerald-600">tax-free</strong>.
                 For optometrists, qualifying employers include:
               </p>
-              <ul className="mt-2 space-y-1 list-disc list-inside text-slate-400">
+              <ul className="mt-2 space-y-1 list-disc list-inside text-slate-500">
                 <li>Federally Qualified Health Centers (FQHCs)</li>
                 <li>VA hospitals and VA-affiliated clinics</li>
                 <li>Indian Health Service (IHS)</li>
@@ -88,7 +88,7 @@ export default function ContextPage() {
               </p>
             </div>
             <div>
-              <p className="font-semibold text-slate-200 mb-1">Aggressive Payoff</p>
+              <p className="font-semibold text-slate-800 mb-1">Aggressive Payoff</p>
               <p>
                 Paying more than the minimum each month (the calculator models +$500/mo) dramatically
                 reduces total interest and time to payoff. This is the best strategy once you have a
@@ -97,10 +97,10 @@ export default function ContextPage() {
               </p>
             </div>
             <div>
-              <p className="font-semibold text-slate-200 mb-1">Forbearance</p>
+              <p className="font-semibold text-slate-800 mb-1">Forbearance</p>
               <p>
                 A temporary pause or reduction in payments, available during financial hardship or residency.
-                <strong className="text-rose-400"> Critical warning:</strong> in general forbearance, interest
+                <strong className="text-rose-600"> Critical warning:</strong> in general forbearance, interest
                 continues to accrue and capitalizes (is added to your principal balance) at the end. This
                 increases your long-term debt. Only use this as a last resort. IDR plans are almost always
                 better than forbearance because interest doesn&apos;t capitalize on SAVE.
@@ -155,8 +155,8 @@ export default function ContextPage() {
                   body: "Your own savings + your partner's income contributions can meaningfully reduce how much you borrow. Even $20k–$40k pre-saved creates a real dent.",
                 },
               ].map((item, i) => (
-                <div key={i} className="rounded-lg bg-slate-800/60 border border-slate-700/40 p-3">
-                  <p className="font-medium text-slate-200 text-xs mb-1">{item.title}</p>
+                <div key={i} className="rounded-lg bg-slate-50 border border-slate-200 p-3">
+                  <p className="font-medium text-slate-800 text-xs mb-1">{item.title}</p>
                   <p className="text-xs text-slate-500">{item.body}</p>
                 </div>
               ))}
@@ -197,10 +197,10 @@ export default function ContextPage() {
                 benchmark: "Usually argues AGAINST long delays",
               },
             ].map((item, i) => (
-              <div key={i} className="rounded-lg bg-slate-800/50 border border-slate-700/40 p-3 space-y-1">
-                <p className="font-semibold text-slate-200 text-sm">{item.metric}</p>
-                <p className="text-xs text-slate-400">{item.explain}</p>
-                <p className="text-xs text-indigo-400 font-medium">{item.benchmark}</p>
+              <div key={i} className="rounded-lg bg-slate-50 border border-slate-200 p-3 space-y-1">
+                <p className="font-semibold text-slate-800 text-sm">{item.metric}</p>
+                <p className="text-xs text-slate-500">{item.explain}</p>
+                <p className="text-xs text-indigo-600 font-medium">{item.benchmark}</p>
               </div>
             ))}
           </div>
@@ -219,10 +219,10 @@ export default function ContextPage() {
                 { label: "Avg OD Mid-Career", value: "$130,000–$160,000", note: "5–10 years experience" },
                 { label: "OD Practice Owner", value: "$150,000–$250,000+", note: "Highly variable" },
               ].map((s, i) => (
-                <div key={i} className="rounded-lg bg-slate-800/60 border border-slate-700/40 p-3 text-center">
-                  <p className="text-lg font-bold text-indigo-400">{s.value}</p>
-                  <p className="text-sm font-medium text-slate-300">{s.label}</p>
-                  <p className="text-xs text-slate-500 mt-0.5">{s.note}</p>
+                <div key={i} className="rounded-lg bg-slate-50 border border-slate-200 p-3 text-center">
+                  <p className="text-lg font-bold text-indigo-600">{s.value}</p>
+                  <p className="text-sm font-medium text-slate-700">{s.label}</p>
+                  <p className="text-xs text-slate-400 mt-0.5">{s.note}</p>
                 </div>
               ))}
             </div>
@@ -232,14 +232,14 @@ export default function ContextPage() {
               income into your early-career repayment planning — IDR plans are particularly helpful here.
             </p>
             <p>
-              OD is a <strong className="text-slate-200">stable, high-demand profession</strong>. The Bureau
+              OD is a <strong className="text-slate-800">stable, high-demand profession</strong>. The Bureau
               of Labor Statistics projects 9% job growth through 2032 (faster than average). Geographic
               flexibility is high — ODs are needed in rural and suburban markets, and corporate optometry
               provides immediate high-income employment without the capital risk of practice ownership.
             </p>
-            <div className="rounded-lg bg-amber-500/10 border border-amber-500/20 p-3">
-              <p className="text-xs text-amber-300 font-semibold mb-1">⚠ Important Consideration</p>
-              <p className="text-xs text-amber-200/70">
+            <div className="rounded-lg bg-amber-50 border border-amber-200 p-3">
+              <p className="text-xs text-amber-700 font-semibold mb-1">⚠ Important Consideration</p>
+              <p className="text-xs text-amber-600">
                 Average OD debt at graduation is $200,000–$230,000. You are not alone in this situation.
                 The profession has well-worn paths to managing this debt — especially PSLF, IHS, and NHSC.
                 Plan these strategies in advance and they can dramatically change the financial outcome.
@@ -283,9 +283,9 @@ export default function ContextPage() {
               },
             ].map((item, i) => (
               <div key={i} className="flex gap-3">
-                <span className="text-indigo-400 flex-shrink-0 mt-0.5">→</span>
+                <span className="text-indigo-500 flex-shrink-0 mt-0.5">→</span>
                 <div>
-                  <p className="text-sm font-medium text-slate-200">{item.tip}</p>
+                  <p className="text-sm font-medium text-slate-800">{item.tip}</p>
                   <p className="text-xs text-slate-500 mt-0.5">{item.detail}</p>
                 </div>
               </div>
@@ -300,32 +300,32 @@ export default function ContextPage() {
         icon="📖"
         content={
           <div className="space-y-3">
-            <p className="text-slate-300 font-medium">
+            <p className="text-slate-700 font-medium">
               Here&apos;s a realistic example you can enter into the calculator to see how the numbers work:
             </p>
-            <div className="rounded-lg bg-slate-800/60 border border-slate-700/40 p-4 space-y-2 font-mono text-xs">
-              <p className="text-slate-300 font-sans font-semibold mb-2">Inputs:</p>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-slate-400">
-                <span>Your income (debt-free):</span> <span className="text-indigo-300">$65,000/yr</span>
-                <span>Her current debt:</span> <span className="text-indigo-300">$30,000</span>
-                <span>Her current debt rate:</span> <span className="text-indigo-300">5.5%</span>
-                <span>OD school cost (4 years):</span> <span className="text-indigo-300">$200,000</span>
-                <span>School loan rate (Grad PLUS):</span> <span className="text-indigo-300">8.05%</span>
-                <span>Funding offset (scholarship):</span> <span className="text-indigo-300">$20,000</span>
-                <span>Expected OD salary:</span> <span className="text-indigo-300">$130,000/yr</span>
-                <span>Monthly household expenses:</span> <span className="text-indigo-300">$4,500/mo</span>
+            <div className="rounded-lg bg-slate-50 border border-slate-200 p-4 space-y-2 font-mono text-xs">
+              <p className="text-slate-700 font-sans font-semibold mb-2">Inputs:</p>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-slate-500">
+                <span>Your income (debt-free):</span> <span className="text-indigo-600 font-semibold">$65,000/yr</span>
+                <span>Her current debt:</span> <span className="text-indigo-600 font-semibold">$30,000</span>
+                <span>Her current debt rate:</span> <span className="text-indigo-600 font-semibold">5.5%</span>
+                <span>OD school cost (4 years):</span> <span className="text-indigo-600 font-semibold">$200,000</span>
+                <span>School loan rate (Grad PLUS):</span> <span className="text-indigo-600 font-semibold">8.05%</span>
+                <span>Funding offset (scholarship):</span> <span className="text-indigo-600 font-semibold">$20,000</span>
+                <span>Expected OD salary:</span> <span className="text-indigo-600 font-semibold">$130,000/yr</span>
+                <span>Monthly household expenses:</span> <span className="text-indigo-600 font-semibold">$4,500/mo</span>
               </div>
-              <p className="text-slate-300 font-sans font-semibold mt-3 mb-2">What you&apos;d see:</p>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-slate-400">
-                <span>Total debt:</span> <span className="text-amber-300">$210,000</span>
-                <span>Combined income:</span> <span className="text-emerald-300">$195,000/yr</span>
-                <span>Debt-to-income ratio:</span> <span className="text-amber-300">1.1x ✓ Good</span>
-                <span>Standard 10yr payment:</span> <span className="text-indigo-300">~$2,350/mo</span>
-                <span>PSLF monthly payment:</span> <span className="text-emerald-300">~$810/mo</span>
-                <span>PSLF forgiven (10yr):</span> <span className="text-emerald-300">~$140,000+</span>
+              <p className="text-slate-700 font-sans font-semibold mt-3 mb-2">What you&apos;d see:</p>
+              <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-slate-500">
+                <span>Total debt:</span> <span className="text-amber-600 font-semibold">$210,000</span>
+                <span>Combined income:</span> <span className="text-emerald-600 font-semibold">$195,000/yr</span>
+                <span>Debt-to-income ratio:</span> <span className="text-amber-600 font-semibold">1.1x ✓ Good</span>
+                <span>Standard 10yr payment:</span> <span className="text-indigo-600 font-semibold">~$2,350/mo</span>
+                <span>PSLF monthly payment:</span> <span className="text-emerald-600 font-semibold">~$810/mo</span>
+                <span>PSLF forgiven (10yr):</span> <span className="text-emerald-600 font-semibold">~$140,000+</span>
               </div>
             </div>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-400">
               With a funding offset of $20k (scholarship), the PSLF path looks extremely compelling —
               10 years of lower payments and a large tax-free forgiveness. But it requires her to work
               at a qualifying nonprofit or government employer for those 10 years.
@@ -335,9 +335,9 @@ export default function ContextPage() {
       />
 
       {/* Disclaimer */}
-      <div className="rounded-lg border border-slate-700/40 bg-slate-900/40 p-4">
-        <p className="text-xs text-slate-500 leading-relaxed">
-          <strong className="text-slate-400">Disclaimer:</strong> This tool provides general financial
+      <div className="rounded-lg border border-slate-200 bg-white p-4">
+        <p className="text-xs text-slate-400 leading-relaxed">
+          <strong className="text-slate-500">Disclaimer:</strong> This tool provides general financial
           education and estimates only. It does not constitute professional financial, tax, or legal advice.
           Calculations use simplified models — actual loan terms, tax treatment, and forgiveness eligibility
           depend on specific circumstances. Consult a licensed financial advisor or student loan specialist
