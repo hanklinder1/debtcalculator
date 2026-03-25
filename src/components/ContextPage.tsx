@@ -7,7 +7,7 @@ interface Section {
 
 function SectionBlock({ title, content }: Section) {
   return (
-    <div className="border border-neutral-200 rounded-xl bg-white overflow-hidden" id="context">
+    <div className="border border-neutral-200 rounded-xl bg-white overflow-hidden">
       <div className="px-6 py-4 border-b border-neutral-100">
         <h3 className="font-semibold text-neutral-900 text-sm">{title}</h3>
       </div>
@@ -19,13 +19,11 @@ function SectionBlock({ title, content }: Section) {
 export default function ContextPage() {
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div className="border border-neutral-200 rounded-xl bg-white p-6">
         <h2 className="text-lg font-bold text-neutral-900 mb-2">Understanding Your Decision</h2>
         <p className="text-sm text-neutral-500 leading-relaxed">
-          This page explains every concept used in the calculator — what each repayment strategy is,
-          how financial metrics are calculated, and how to think about this decision.
-          Read this before you run the numbers.
+          This page explains every concept used in the calculator — repayment strategies,
+          financial metrics, common ways to reduce debt, and how to think about this decision.
         </p>
       </div>
 
@@ -37,27 +35,39 @@ export default function ContextPage() {
             {[
               {
                 name: "Standard 10-Year Repayment",
-                body: "The default federal plan. Fixed monthly payments over 10 years. You pay the least total interest because you're paying down principal quickly. Best for borrowers whose income can comfortably cover payments from day one.",
+                body: "The default federal plan. Fixed monthly payments over 10 years. You pay the least total interest because principal is paid down quickly. Best when income comfortably covers payments from the start.",
               },
               {
                 name: "Extended 25-Year Repayment",
-                body: "Stretches payments over 25 years, lowering the monthly burden but dramatically increasing total interest paid. Use this only if cash flow is genuinely tight. Ideally, refinance back to a shorter term once income stabilizes.",
+                body: "Stretches payments over 25 years, lowering the monthly burden but dramatically increasing total interest. Use only if cash flow is genuinely tight, and refinance to a shorter term once income stabilizes.",
               },
               {
-                name: "SAVE Plan (Income-Driven Repayment)",
-                body: "Saving on a Valuable Education (SAVE) is the newest IDR plan. Payments are based on 10% of discretionary income (AGI minus ~225% of the federal poverty line). If your payment doesn't cover the interest accruing, the government waives the difference. After 25 years of qualifying payments, the remaining balance is forgiven. The forgiven amount is currently treated as taxable income.",
+                name: "Income-Driven Repayment (IDR)",
+                body: "Payments are based on 10% of your discretionary income (AGI minus ~225% of the federal poverty line). If your payment doesn't cover interest, the government may cover the difference. After 20-25 years of qualifying payments, the remaining balance is forgiven (may be taxable).",
               },
               {
-                name: "PSLF — Public Service Loan Forgiveness",
-                body: "Work for a qualifying employer (government or 501(c)(3) nonprofit), make 120 qualifying payments (10 years) on an IDR plan, and the remaining balance is forgiven tax-free. For optometrists, qualifying employers include FQHCs, VA hospitals, Indian Health Service, state health departments, military, and some academic medical centers.",
+                name: "Public Service Loan Forgiveness (PSLF)",
+                body: "Work for a qualifying employer (government or 501(c)(3) nonprofit) for 10 years, make 120 qualifying payments on an IDR plan, and the remaining balance is forgiven tax-free. One of the most powerful tools for large balances.",
               },
               {
                 name: "Aggressive Payoff",
-                body: "Paying more than the minimum each month (+$500/mo modeled) dramatically reduces total interest and time to payoff. Best strategy once you have stable income and a solid emergency fund (3-6 months of expenses).",
+                body: "Pay more than the minimum each month. Even an extra $200-500/mo dramatically reduces total interest and payoff time. Best once you have stable income and a 3-6 month emergency fund.",
               },
               {
-                name: "Forbearance",
-                body: "A temporary pause in payments during hardship or residency. Critical warning: interest capitalizes (is added to principal) at the end. This increases long-term debt. IDR plans are almost always better than forbearance because interest doesn't capitalize on SAVE.",
+                name: "Debt Avalanche",
+                body: "Pay minimums on all debts, then throw all extra money at the highest interest rate first. Mathematically optimal for minimizing total interest. Requires discipline since you may not see quick wins early.",
+              },
+              {
+                name: "Debt Snowball",
+                body: "Pay minimums on all debts, then attack the smallest balance first for psychological wins. Costs slightly more in interest than the avalanche method, but the motivation from quick payoffs keeps many people on track.",
+              },
+              {
+                name: "Refinancing",
+                body: "Once you have stable income and good credit, refinancing to a lower rate can save thousands. Important: refinancing federal loans into private loans forfeits IDR and PSLF eligibility. Only refinance if you won't need those programs.",
+              },
+              {
+                name: "Forbearance / Deferment",
+                body: "A temporary pause on payments during hardship. During forbearance, interest accrues and capitalizes (is added to your principal), growing your debt. IDR plans are almost always better than forbearance. Use only as a last resort.",
               },
             ].map((item) => (
               <div key={item.name}>
@@ -69,40 +79,47 @@ export default function ContextPage() {
         }
       />
 
-      {/* Funding Offsets */}
+      {/* Funding Sources */}
       <SectionBlock
-        title="Ways to Reduce the Debt Load"
+        title="Common Ways to Reduce Your Debt Load"
         content={
           <div className="space-y-4">
             <p className="text-neutral-500">
               Every dollar that reduces initial borrowing saves significantly more in interest over time.
-              Pursue these aggressively before and during school:
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[
                 {
-                  title: "Scholarships & Grants",
-                  body: "AAOPT Foundation, state optometry associations, and most OD schools offer merit/need-based scholarships. Apply every year.",
+                  title: "Institutional Scholarships & Grants",
+                  body: "Most graduate schools offer merit and need-based scholarships. Apply every year — many students don't reapply after year 1.",
                 },
                 {
                   title: "Employer Tuition Assistance",
-                  body: "Some practice chains (VSP, MyEyeDr, America's Best) offer $10k-$30k in tuition reimbursement or signing bonuses.",
+                  body: "Many employers offer $5k-$30k in tuition reimbursement or signing bonuses, sometimes in exchange for a post-graduation employment commitment.",
                 },
                 {
-                  title: "Military HPSP",
-                  body: "Army, Navy, and Air Force offer full tuition + monthly stipend in exchange for active duty service after graduation.",
+                  title: "Graduate Assistantships",
+                  body: "Teaching or research assistantships often include tuition waivers plus a stipend. Competitive but highly valuable.",
                 },
                 {
-                  title: "IHS Loan Repayment",
-                  body: "Up to $40k/year in tax-free loan repayment for working at an IHS facility. 2-year commitment, renewable. Pairs with PSLF.",
+                  title: "Military Education Benefits",
+                  body: "GI Bill, HPSP, and other military programs can cover full tuition plus provide a monthly stipend in exchange for service.",
                 },
                 {
-                  title: "NHSC",
-                  body: "Up to $50k tax-free for 2-year commitment at an approved health shortage site. OD is an eligible discipline.",
+                  title: "Federal Service Programs (NHSC, IHS)",
+                  body: "National Health Service Corps and Indian Health Service offer up to $50k in tax-free loan repayment for working in underserved areas.",
                 },
                 {
-                  title: "State Loan Repayment Programs",
-                  body: "Many states offer loan repayment for providers in underserved areas. Check your state's health department.",
+                  title: "State Grant & Loan Repayment Programs",
+                  body: "Many states offer grants or loan repayment for professionals who serve in high-need areas. Check your state's programs.",
+                },
+                {
+                  title: "Part-Time Work During School",
+                  body: "Working 10-20 hours/week in a related field can offset living expenses and reduce how much you borrow.",
+                },
+                {
+                  title: "Personal Savings & Family Contributions",
+                  body: "Even $20k-$40k pre-saved creates a meaningful dent. Every dollar saved is a dollar you don't pay 7-8% interest on for 10 years.",
                 },
               ].map((item) => (
                 <div key={item.title} className="rounded-lg bg-neutral-50 border border-neutral-100 p-4">
@@ -115,7 +132,7 @@ export default function ContextPage() {
         }
       />
 
-      {/* Key Financial Metrics */}
+      {/* Key Metrics */}
       <SectionBlock
         title="Key Financial Metrics"
         content={
@@ -123,22 +140,22 @@ export default function ContextPage() {
             {[
               {
                 metric: "Debt-to-Income Ratio (DTI)",
-                explain: "Total debt divided by combined annual household income. Under 2x is manageable; 2-3.5x is caution; above 3.5x warrants serious reconsideration.",
+                explain: "Total debt divided by combined annual income. The most important single number for assessing debt manageability.",
                 benchmark: "< 2x = good | 2-3.5x = caution | > 3.5x = high risk",
               },
               {
-                metric: "Loan-to-Income Ratio",
-                explain: "Total student loan debt divided by expected annual salary. Most planners recommend keeping this under 1.5x.",
-                benchmark: "< 1.5x = comfortable | 1.5-2.5x = workable | > 2.5x = challenging",
-              },
-              {
                 metric: "Payment-to-Income %",
-                explain: "Loan payment as percentage of monthly gross income. Under 10-15% is ideal. Above 20-25% crowds out savings and life goals.",
+                explain: "Loan payment as a percentage of monthly gross income. Tells you how much of your paycheck goes to debt.",
                 benchmark: "< 15% = comfortable | 15-25% = tight | > 25% = high pressure",
               },
               {
+                metric: "Interest Rate Impact",
+                explain: "A $200,000 loan at 7% vs 5% costs roughly $35,000 more in interest over 10 years. Rate differences compound dramatically over time.",
+                benchmark: "Refinancing from 8% to 5% can save $40k+",
+              },
+              {
                 metric: "Opportunity Cost",
-                explain: "The value of what you give up. Delaying school 2 years means foregoing 2 years of post-grad salary — typically $240k+ in foregone income.",
+                explain: "The value of what you give up. Delaying school means foregoing years of post-grad salary. This is typically far more than the interest savings from borrowing less.",
                 benchmark: "Usually argues AGAINST long delays",
               },
             ].map((item) => (
@@ -152,64 +169,35 @@ export default function ContextPage() {
         }
       />
 
-      {/* Optometry Context */}
+      {/* Tips */}
       <SectionBlock
-        title="Optometry Career Financial Context"
-        content={
-          <div className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {[
-                { label: "Avg Starting Salary", value: "$110K-$125K", note: "Private practice, corporate" },
-                { label: "Avg Mid-Career", value: "$130K-$160K", note: "5-10 years experience" },
-                { label: "Practice Owner", value: "$150K-$250K+", note: "Highly variable" },
-              ].map((s) => (
-                <div key={s.label} className="rounded-lg bg-neutral-50 border border-neutral-100 p-4 text-center">
-                  <p className="text-xl font-bold text-neutral-900">{s.value}</p>
-                  <p className="text-sm font-medium text-neutral-600 mt-1">{s.label}</p>
-                  <p className="text-xs text-neutral-400 mt-0.5">{s.note}</p>
-                </div>
-              ))}
-            </div>
-            <p className="text-neutral-500 text-sm">
-              OD school takes 4 years after undergrad. Many complete a 1-year residency after graduation
-              ($45-$65k salary). OD is a stable, high-demand profession with 9% projected job growth through 2032.
-            </p>
-            <div className="rounded-lg bg-amber-50 border border-amber-200 p-4">
-              <p className="text-xs text-amber-800 font-semibold mb-1">Important</p>
-              <p className="text-xs text-amber-700">
-                Average OD debt at graduation is $200,000-$230,000. The profession has well-worn paths
-                to managing this debt — especially PSLF, IHS, and NHSC. Plan these strategies in advance.
-              </p>
-            </div>
-          </div>
-        }
-      />
-
-      {/* Couple Finance */}
-      <SectionBlock
-        title="Managing This as a Couple"
+        title="Smart Moves for Managing School Debt"
         content={
           <div className="space-y-4">
             {[
               {
+                tip: "Build an emergency fund before school",
+                detail: "Aim for 3-6 months of household expenses in a high-yield savings account. This prevents you from borrowing more when unexpected costs hit.",
+              },
+              {
+                tip: "Borrow only what you need",
+                detail: "Just because you're approved for $60k/year doesn't mean you should take it all. Every dollar you don't borrow saves $1.50+ in total repayment.",
+              },
+              {
                 tip: "File taxes strategically",
-                detail: "If on IDR, filing separately (MFS) can lower calculated payments by excluding partner income. Run the numbers — IDR savings often outweigh the MFS tax penalty.",
+                detail: "If married and on IDR, filing separately can lower payments by excluding a spouse's income. Run the numbers — the IDR savings often outweigh the tax penalty.",
               },
               {
-                tip: "Build an emergency fund first",
-                detail: "Before school starts, aim for 6 months of household expenses in a HYSA. This protects against financial shock during school and residency.",
+                tip: "Don't neglect retirement savings",
+                detail: "Even while paying debt, contribute enough to capture employer 401(k) matches (free money) and consider funding a Roth IRA. Compounding time lost is irreplaceable.",
               },
               {
-                tip: "Don't over-optimize for debt",
-                detail: "Keep contributing to a Roth IRA ($7k/year) even while paying loans. The compounding time you lose is irreplaceable.",
+                tip: "Communicate about money",
+                detail: "If you're doing this with a partner, align on risk tolerance and budget expectations. This tool gives you numbers — the decision requires alignment on values too.",
               },
               {
-                tip: "Plan for the single-income years",
-                detail: "While the student is in school, one income carries the household. Budget explicitly for this before it happens.",
-              },
-              {
-                tip: "Communicate about risk tolerance",
-                detail: "Debt affects people differently. Have an honest conversation about what level of monthly payment feels manageable. This tool gives numbers — the decision requires alignment on values too.",
+                tip: "Revisit your plan annually",
+                detail: "Income changes, interest rates change, life changes. Recalculate every year and adjust your strategy. What's optimal at graduation may not be optimal 3 years later.",
               },
             ].map((item) => (
               <div key={item.tip} className="flex gap-3">
@@ -229,7 +217,7 @@ export default function ContextPage() {
         <p className="text-xs text-neutral-400 leading-relaxed">
           <strong className="text-neutral-500">Disclaimer:</strong> This tool provides general financial
           education and estimates only. It does not constitute professional financial, tax, or legal advice.
-          Consult a licensed financial advisor or student loan specialist before making major financial decisions.
+          Consult a licensed financial advisor before making major financial decisions.
         </p>
       </div>
     </div>

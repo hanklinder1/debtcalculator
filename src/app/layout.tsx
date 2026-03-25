@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Optometry School Debt Planner",
-  description: "A comprehensive financial planning tool for evaluating optometry school debt, repayment strategies, and ROI",
+  title: "Grad School Debt Planner",
+  description: "A comprehensive financial planning tool for evaluating graduate school debt, repayment strategies, and ROI",
 };
 
 export default function RootLayout({

@@ -10,7 +10,7 @@ export default function Home() {
         <nav className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-6 lg:px-12 py-6">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-neutral-900 flex items-center justify-center">
-              <span className="text-white text-sm font-bold">OD</span>
+              <span className="text-white text-sm font-bold">DP</span>
             </div>
             <span className="text-sm font-semibold tracking-tight text-neutral-900">DEBT PLANNER</span>
           </div>
@@ -26,7 +26,7 @@ export default function Home() {
           {/* Left — Copy */}
           <div className="max-w-xl">
             <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-8 font-medium">
-              Optometry School Financial Planner
+              Grad School Financial Planner
             </p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900 leading-[1.08]">
               Plan Your
@@ -50,7 +50,7 @@ export default function Home() {
                 </svg>
               </a>
               <a
-                href="#context"
+                href="#how-it-works"
                 className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors font-medium"
               >
                 How it works
@@ -60,13 +60,13 @@ export default function Home() {
             {/* Quick stats */}
             <div className="mt-16 grid grid-cols-3 gap-6 border-t border-neutral-200 pt-8">
               {[
-                { label: "Avg OD Salary", value: "$130K+" },
-                { label: "Avg Grad Debt", value: "$215K" },
-                { label: "Repayment Plans", value: "6" },
+                { label: "Repayment Plans", value: "6+" },
+                { label: "People Supported", value: "1-5" },
+                { label: "Export Formats", value: "PDF & Excel" },
               ].map((s) => (
                 <div key={s.label}>
                   <p className="text-2xl font-bold text-neutral-900">{s.value}</p>
-                  <p className="text-xs text-neutral-400 mt-1">{s.label}</p>
+                  <p className="text-xs text-neutral-500 mt-1">{s.label}</p>
                 </div>
               ))}
             </div>
@@ -85,7 +85,7 @@ export default function Home() {
             </div>
             {/* Floating card */}
             <div className="absolute -left-8 bottom-16 bg-white border border-neutral-200 rounded-xl p-5 shadow-lg max-w-[240px]">
-              <p className="text-xs text-neutral-400 uppercase tracking-wide font-medium mb-2">Key Insight</p>
+              <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium mb-2">Key Insight</p>
               <p className="text-sm text-neutral-700 leading-relaxed">
                 Every <span className="font-semibold text-neutral-900">$10K</span> in scholarships saves you{" "}
                 <span className="font-semibold text-neutral-900">$15K+</span> over a 10-year loan.
@@ -98,6 +98,63 @@ export default function Home() {
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-neutral-300">
           <span className="text-xs tracking-wide">Scroll</span>
           <div className="w-px h-8 bg-neutral-200" />
+        </div>
+      </section>
+
+      {/* ── How It Works ───────────────────────────────────────── */}
+      <section id="how-it-works" className="bg-white border-t border-neutral-200">
+        <div className="max-w-5xl mx-auto px-6 lg:px-12 py-20">
+          <p className="text-xs tracking-[0.2em] uppercase text-neutral-400 mb-4 font-medium">How It Works</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 tracking-tight mb-6">
+            Three steps to clarity.
+          </h2>
+          <p className="text-neutral-500 max-w-2xl mb-12 leading-relaxed">
+            Graduate school is a major financial decision. This tool helps you understand the full picture —
+            what you&apos;ll owe, how you&apos;ll pay it back, and the smartest path forward for your situation.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                step: "01",
+                title: "Enter Your Numbers",
+                description:
+                  "Add up to 5 people. For each, enter current debt, income, monthly expenses, school costs, and any funding or scholarships. The tool handles the math.",
+              },
+              {
+                step: "02",
+                title: "Compare Your Options",
+                description:
+                  "See 6+ repayment strategies side-by-side — from standard 10-year plans to income-driven repayment and loan forgiveness. Interactive charts show how each plays out over time.",
+              },
+              {
+                step: "03",
+                title: "Get a Personalized Plan",
+                description:
+                  "Based on your specific situation, receive a structured suggested path — step-by-step actions prioritized by impact. Export everything to PDF or Excel to share or save.",
+              },
+            ].map((item) => (
+              <div key={item.step} className="space-y-4">
+                <div className="w-10 h-10 rounded-lg bg-neutral-900 text-white flex items-center justify-center text-sm font-bold">
+                  {item.step}
+                </div>
+                <h3 className="font-semibold text-neutral-900 text-lg">{item.title}</h3>
+                <p className="text-sm text-neutral-500 leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 pt-8 border-t border-neutral-100">
+            <a
+              href="#calculator"
+              className="inline-flex items-center gap-2 bg-neutral-900 text-white text-sm font-medium px-6 py-3.5 rounded-lg hover:bg-neutral-800 transition-colors"
+            >
+              Get Started
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="ml-1">
+                <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </section>
 
