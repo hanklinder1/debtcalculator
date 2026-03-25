@@ -204,7 +204,7 @@ export default function Calculator() {
 
             {/* Person sections */}
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-400">Person 1 — The Student</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Person 1</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <InputCard
                   title="Current Debt"
@@ -240,7 +240,7 @@ export default function Calculator() {
                     prefix="$"
                     suffix="/yr"
                     step={5000}
-                    hint="This income stops during school"
+                    hint="This income stops during school years"
                   />
                   <NumberInput
                     label="Monthly Expenses"
@@ -256,7 +256,7 @@ export default function Calculator() {
             </div>
 
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-400">Person 2 — The Partner</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Person 2</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <InputCard
                   title="Current Debt"
@@ -291,7 +291,7 @@ export default function Calculator() {
                     prefix="$"
                     suffix="/yr"
                     step={5000}
-                    hint="Primary household income while partner is in school"
+                    hint="Primary household income while Person 1 is in school"
                   />
                   <NumberInput
                     label="Monthly Expenses"
@@ -309,12 +309,12 @@ export default function Calculator() {
             {/* Household budget snapshot during school */}
             {duringSchoolIncome > 0 && householdExpenses > 0 && (
               <div className="border border-neutral-200 rounded-xl bg-white p-5">
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-3">
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-3">
                   Household Budget During School
                 </h4>
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-neutral-500">Partner&apos;s monthly income</span>
+                    <span className="text-neutral-500">Person 2&apos;s monthly income</span>
                     <span className="text-neutral-900 font-medium">{fmt(duringSchoolIncome / 12)}/mo</span>
                   </div>
                   <div className="flex justify-between text-sm">
@@ -339,7 +339,7 @@ export default function Calculator() {
             )}
 
             <div className="space-y-3">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-400">Optometry School</h3>
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Optometry School</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <InputCard
                   title="Cost of School"
@@ -416,7 +416,7 @@ export default function Calculator() {
             {inputs.expectedPostGradSalary > 0 && totalDebt > 0 && (
               <div className="border border-neutral-200 rounded-xl bg-white p-5 space-y-3">
                 <div className="flex justify-between items-center">
-                  <h4 className="text-xs font-semibold uppercase tracking-wider text-neutral-400">Loan-to-Income Ratio</h4>
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Loan-to-Income Ratio</h4>
                   <span
                     className={`text-sm font-bold tabular-nums ${
                       totalDebt / inputs.expectedPostGradSalary < 1.5

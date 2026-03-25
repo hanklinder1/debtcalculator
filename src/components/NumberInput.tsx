@@ -27,7 +27,7 @@ export default function NumberInput({
 }: NumberInputProps) {
   return (
     <div className="space-y-1.5">
-      <label className="block text-xs font-medium text-neutral-500">{label}</label>
+      <label className="block text-xs font-medium text-neutral-600">{label}</label>
       <div className="relative flex items-center">
         {prefix && (
           <span className="absolute left-3 text-neutral-400 text-sm select-none">{prefix}</span>
@@ -46,13 +46,13 @@ export default function NumberInput({
           className={`w-full rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-900 text-sm py-2.5
             ${prefix ? "pl-7" : "pl-3"} ${suffix ? "pr-12" : "pr-3"}
             focus:outline-none focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900
-            placeholder:text-neutral-300 transition-colors`}
+            placeholder:text-neutral-400 transition-colors`}
         />
         {suffix && (
           <span className="absolute right-3 text-neutral-400 text-sm select-none">{suffix}</span>
         )}
       </div>
-      {hint && <p className="text-xs text-neutral-400">{hint}</p>}
+      {hint && <p className="text-xs text-neutral-500">{hint}</p>}
     </div>
   );
 }
