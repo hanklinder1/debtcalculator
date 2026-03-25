@@ -31,70 +31,81 @@ export default function RepaymentCard({
 
   return (
     <div
-      className={`rounded-xl border transition-all shadow-sm overflow-hidden ${
+      className={`rounded-xl border transition-all overflow-hidden ${
         highlighted
-          ? "border-indigo-200 bg-indigo-50"
-          : "border-slate-300 bg-slate-50"
+          ? "border-neutral-900 bg-white"
+          : "border-neutral-200 bg-white"
       }`}
     >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full text-left p-4 flex items-start justify-between gap-4"
+        className="w-full text-left p-5 flex items-start justify-between gap-4"
       >
         <div className="space-y-3 flex-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="font-semibold text-slate-800 text-sm">{strategy}</span>
+            <span className="font-semibold text-neutral-900 text-sm">{strategy}</span>
+            {highlighted && (
+              <span className="text-[10px] bg-neutral-900 text-white px-2 py-0.5 rounded-full font-medium uppercase tracking-wide">
+                Recommended
+              </span>
+            )}
             {forgiven !== undefined && forgiven > 1000 && (
-              <span className="text-xs bg-emerald-100 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full font-medium">
+              <span className="text-[10px] bg-emerald-100 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full font-medium">
                 {fmt(forgiven)} forgiven
               </span>
             )}
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div>
-              <p className="text-xs text-slate-400">Monthly</p>
-              <p className="text-base font-bold text-slate-900 tabular-nums">{fmt(monthlyPayment)}</p>
+              <p className="text-[10px] uppercase tracking-wide text-neutral-400">Monthly</p>
+              <p className="text-base font-bold text-neutral-900 tabular-nums">{fmt(monthlyPayment)}</p>
             </div>
             <div>
-              <p className="text-xs text-slate-400">Total Paid</p>
-              <p className="text-base font-bold text-slate-900 tabular-nums">{fmt(totalPaid)}</p>
+              <p className="text-[10px] uppercase tracking-wide text-neutral-400">Total Paid</p>
+              <p className="text-base font-bold text-neutral-900 tabular-nums">{fmt(totalPaid)}</p>
             </div>
             <div>
-              <p className="text-xs text-slate-400">Total Interest</p>
-              <p className="text-base font-bold text-rose-600 tabular-nums">{fmt(totalInterest)}</p>
+              <p className="text-[10px] uppercase tracking-wide text-neutral-400">Total Interest</p>
+              <p className="text-base font-bold text-red-600 tabular-nums">{fmt(totalInterest)}</p>
             </div>
             <div>
-              <p className="text-xs text-slate-400">Payoff Time</p>
-              <p className="text-base font-bold text-slate-900">{yearsToPayoff} yrs</p>
+              <p className="text-[10px] uppercase tracking-wide text-neutral-400">Payoff</p>
+              <p className="text-base font-bold text-neutral-900">{yearsToPayoff} yrs</p>
             </div>
           </div>
         </div>
-        <span className={`text-slate-400 text-lg mt-1 flex-shrink-0 transition-transform ${open ? "rotate-180" : ""}`}>
-          ›
-        </span>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          className={`text-neutral-400 mt-1 flex-shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+        >
+          <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
       </button>
 
       {open && (
-        <div className="px-4 pb-4 space-y-3 border-t border-slate-200 pt-3">
-          <p className="text-sm text-slate-600 leading-relaxed">{notes}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="px-5 pb-5 space-y-4 border-t border-neutral-100 pt-4">
+          <p className="text-sm text-neutral-500 leading-relaxed">{notes}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <p className="text-xs font-semibold text-emerald-600 mb-1.5 uppercase tracking-wide">Pros</p>
-              <ul className="space-y-1">
+              <p className="text-[10px] font-semibold text-emerald-600 mb-2 uppercase tracking-wider">Pros</p>
+              <ul className="space-y-1.5">
                 {pros.map((p, i) => (
-                  <li key={i} className="text-xs text-slate-600 flex gap-1.5">
-                    <span className="text-emerald-500 flex-shrink-0 mt-0.5">✓</span>
+                  <li key={i} className="text-xs text-neutral-600 flex gap-2">
+                    <span className="text-emerald-500 flex-shrink-0 mt-0.5">+</span>
                     {p}
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <p className="text-xs font-semibold text-rose-600 mb-1.5 uppercase tracking-wide">Cons</p>
-              <ul className="space-y-1">
+              <p className="text-[10px] font-semibold text-red-600 mb-2 uppercase tracking-wider">Cons</p>
+              <ul className="space-y-1.5">
                 {cons.map((c, i) => (
-                  <li key={i} className="text-xs text-slate-600 flex gap-1.5">
-                    <span className="text-rose-500 flex-shrink-0 mt-0.5">✗</span>
+                  <li key={i} className="text-xs text-neutral-600 flex gap-2">
+                    <span className="text-red-500 flex-shrink-0 mt-0.5">-</span>
                     {c}
                   </li>
                 ))}

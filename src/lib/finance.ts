@@ -1,27 +1,29 @@
 // ─── Core financial math ───────────────────────────────────────────────────
 
 export interface Inputs {
-  // Partner current debt
-  partnerCurrentDebt: number;
-  partnerCurrentRate: number; // %
+  // Person 1 — the student
+  person1CurrentDebt: number;
+  person1DebtRate: number; // %
+  person1Income: number; // current annual income (before school)
+  person1MonthlyExpenses: number;
 
-  // New school debt
+  // Person 2 — the partner / spouse
+  person2CurrentDebt: number;
+  person2DebtRate: number; // %
+  person2Income: number;
+  person2MonthlyExpenses: number;
+
+  // School (optometry)
   schoolCost: number;
   schoolRate: number; // % (grad PLUS ~8.05% or Direct Unsubsidized ~6.54%)
-  fundingOffset: number; // scholarships + grants + corporate / employer sponsorship
+  fundingOffset: number; // scholarships + grants + employer sponsorship
 
-  // Partner expected salary after OD
-  partnerSalary: number;
+  // Post-graduation
+  expectedPostGradSalary: number;
 
-  // My income
-  myIncome: number;
-
-  // Waiting scenario: years to wait, savings per year
+  // Waiting scenario
   waitYears: number;
   savingsPerYear: number;
-
-  // Family / household
-  householdExpenses: number; // monthly
 }
 
 export interface RepaymentResult {
@@ -73,28 +75,41 @@ export function monthsToPayoff(principal: number, annualRate: number, monthlyPmt
   return Math.ceil(-Math.log(1 - (principal * r) / monthlyPmt) / Math.log(1 + r));
 }
 
-export function computeNetDebt(inputs: Inputs): number {
-  return Math.max(0, inputs.schoolCost - inputs.fundingOffset) + inputs.partnerCurrentDebt;
+export function computeExistingDebt(inputs: Inputs): number {
+  return inputs.person1CurrentDebt + inputs.person2CurrentDebt;
 }
 
 export function computeNewSchoolDebt(inputs: Inputs): number {
   return Math.max(0, inputs.schoolCost - inputs.fundingOffset);
 }
 
+export function computeNetDebt(inputs: Inputs): number {
+  return computeNewSchoolDebt(inputs) + computeExistingDebt(inputs);
+}
+
+export function computeHouseholdExpenses(inputs: Inputs): number {
+  return inputs.person1MonthlyExpenses + inputs.person2MonthlyExpenses;
+}
+
+export function computeBlendedRate(inputs: Inputs): number {
+  const newDebt = computeNewSchoolDebt(inputs);
+  const p1Debt = inputs.person1CurrentDebt;
+  const p2Debt = inputs.person2CurrentDebt;
+  const totalDebt = newDebt + p1Debt + p2Debt;
+  if (totalDebt === 0) return 0;
+  return (
+    (newDebt * inputs.schoolRate +
+      p1Debt * inputs.person1DebtRate +
+      p2Debt * inputs.person2DebtRate) /
+    totalDebt
+  );
+}
+
 // ─── Repayment strategies ──────────────────────────────────────────────────
 
 export function computeRepaymentStrategies(inputs: Inputs): RepaymentResult[] {
-  const newDebt = computeNewSchoolDebt(inputs);
-  const currentDebt = inputs.partnerCurrentDebt;
-  const totalDebt = newDebt + currentDebt;
-
-  // Blended rate (weighted average)
-  const blendedRate =
-    totalDebt > 0
-      ? (newDebt * inputs.schoolRate + currentDebt * inputs.partnerCurrentRate) / totalDebt
-      : 0;
-
-  const schoolRate = inputs.schoolRate;
+  const totalDebt = computeNetDebt(inputs);
+  const blendedRate = computeBlendedRate(inputs);
   const results: RepaymentResult[] = [];
 
   // 1. Standard 10-year
@@ -144,11 +159,9 @@ export function computeRepaymentStrategies(inputs: Inputs): RepaymentResult[] {
   }
 
   // 3. SAVE / Income-Driven Repayment (IDR)
-  if (newDebt > 0 && inputs.partnerSalary > 0) {
-    // SAVE: discretionary income = AGI - 225% of federal poverty line (~$33,300 for 2 people)
-    // Payment = 5% of discretionary income for undergrad, 10% for grad loans
+  if (computeNewSchoolDebt(inputs) > 0 && inputs.expectedPostGradSalary > 0) {
     const povertyLine = 33300;
-    const discretionary = Math.max(0, inputs.partnerSalary - povertyLine);
+    const discretionary = Math.max(0, inputs.expectedPostGradSalary - povertyLine);
     const annualPayment = discretionary * 0.1;
     const monthlyPmt = annualPayment / 12;
 
@@ -157,7 +170,6 @@ export function computeRepaymentStrategies(inputs: Inputs): RepaymentResult[] {
     let months = 0;
     const r = blendedRate / 100 / 12;
 
-    // simulate 300 months (25 year forgiveness on SAVE for grad)
     while (months < 300 && balance > 0) {
       const interestAccrued = balance * r;
       const effectivePmt = Math.max(monthlyPmt, 0);
@@ -194,11 +206,9 @@ export function computeRepaymentStrategies(inputs: Inputs): RepaymentResult[] {
   }
 
   // 4. PSLF (Public Service Loan Forgiveness)
-  if (newDebt > 0 && inputs.partnerSalary > 0) {
-    // Requires: federal direct loans, IDR plan, 120 qualifying payments (10 years)
-    // at nonprofit/government employer. Tax-free forgiveness.
+  if (computeNewSchoolDebt(inputs) > 0 && inputs.expectedPostGradSalary > 0) {
     const povertyLine = 33300;
-    const discretionary = Math.max(0, inputs.partnerSalary - povertyLine);
+    const discretionary = Math.max(0, inputs.expectedPostGradSalary - povertyLine);
     const monthlyPmt = (discretionary * 0.1) / 12;
 
     let totalPaid = 0;
@@ -267,15 +277,11 @@ export function computeRepaymentStrategies(inputs: Inputs): RepaymentResult[] {
 
   // 6. Forbearance (interest-only for 2 years, then standard)
   if (totalDebt > 0) {
-    const r = blendedRate / 100 / 12;
-    const interestOnlyPmt = totalDebt * r;
-    const balanceAfterForbearance = totalDebt; // principal unchanged, interest paid (not IDR, just forbearance math)
-    // In true forbearance interest capitalizes — model that:
-    const capitalizedBalance = totalDebt * Math.pow(1 + blendedRate / 100, 2); // 2 years capitalized interest
+    const capitalizedBalance = totalDebt * Math.pow(1 + blendedRate / 100, 2);
     const pmt = monthlyPayment(capitalizedBalance, blendedRate, 120);
     const interest = pmt * 120 - capitalizedBalance;
     results.push({
-      strategy: "Forbearance (2 years) → Standard 10-Year",
+      strategy: "Forbearance (2 years) then Standard 10-Year",
       monthlyPayment: pmt,
       totalPaid: pmt * 120,
       totalInterest: capitalizedBalance - totalDebt + interest,
@@ -305,35 +311,31 @@ export interface WaitScenario {
   reducedDebt: number;
   monthlyPaymentAfter: number;
   totalInterestAfter: number;
-  opportunityCostDelay: number; // income not earned while waiting
+  opportunityCostDelay: number;
   netBenefit: number;
 }
 
 export function computeWaitScenario(inputs: Inputs): WaitScenario {
   const savedAmount = inputs.savingsPerYear * inputs.waitYears;
   const reducedSchoolDebt = Math.max(0, computeNewSchoolDebt(inputs) - savedAmount);
-  const reducedTotal = reducedSchoolDebt + inputs.partnerCurrentDebt;
+  const existingDebt = computeExistingDebt(inputs);
+  const reducedTotal = reducedSchoolDebt + existingDebt;
+
   const blendedRate =
     reducedTotal > 0
       ? (reducedSchoolDebt * inputs.schoolRate +
-          inputs.partnerCurrentDebt * inputs.partnerCurrentRate) /
+          inputs.person1CurrentDebt * inputs.person1DebtRate +
+          inputs.person2CurrentDebt * inputs.person2DebtRate) /
         reducedTotal
       : 0;
 
   const pmt = monthlyPayment(reducedTotal, blendedRate, 120);
   const interest = totalInterest(reducedTotal, blendedRate, 120);
 
-  // Opportunity cost: OD salary foregone while waiting
-  const opportunityCost = inputs.partnerSalary * inputs.waitYears;
+  const opportunityCost = inputs.expectedPostGradSalary * inputs.waitYears;
 
-  // Benefit: interest saved vs not waiting
-  const originalDebt = computeNewSchoolDebt(inputs) + inputs.partnerCurrentDebt;
-  const originalBlended =
-    originalDebt > 0
-      ? (computeNewSchoolDebt(inputs) * inputs.schoolRate +
-          inputs.partnerCurrentDebt * inputs.partnerCurrentRate) /
-        originalDebt
-      : 0;
+  const originalDebt = computeNetDebt(inputs);
+  const originalBlended = computeBlendedRate(inputs);
   const originalInterest = totalInterest(originalDebt, originalBlended, 120);
   const interestSaved = originalInterest - interest;
 
@@ -358,13 +360,13 @@ export interface Verdict {
 
 export function computeVerdict(inputs: Inputs): Verdict {
   const totalDebt = computeNetDebt(inputs);
-  const combinedIncome = inputs.myIncome + inputs.partnerSalary;
+  const combinedIncome = inputs.person2Income + inputs.expectedPostGradSalary;
   const dti = combinedIncome > 0 ? totalDebt / combinedIncome : 999;
   const strategies = computeRepaymentStrategies(inputs);
   const standardPmt = strategies.find((s) => s.strategy.startsWith("Standard"))?.monthlyPayment ?? 0;
   const monthlyIncome = combinedIncome / 12;
   const paymentRatio = monthlyIncome > 0 ? standardPmt / monthlyIncome : 999;
-  const loanToIncome = inputs.partnerSalary > 0 ? totalDebt / inputs.partnerSalary : 999;
+  const loanToIncome = inputs.expectedPostGradSalary > 0 ? totalDebt / inputs.expectedPostGradSalary : 999;
 
   const keyMetrics = [
     {
@@ -379,7 +381,7 @@ export function computeVerdict(inputs: Inputs): Verdict {
       flag: dti < 2 ? ("good" as const) : dti < 3.5 ? ("warn" as const) : ("bad" as const),
     },
     {
-      label: "Loan-to-Partner-Income",
+      label: "Loan-to-Student-Income",
       value: `${loanToIncome.toFixed(1)}x`,
       flag:
         loanToIncome < 1.5 ? ("good" as const) : loanToIncome < 2.5 ? ("warn" as const) : ("bad" as const),
@@ -391,7 +393,7 @@ export function computeVerdict(inputs: Inputs): Verdict {
         paymentRatio < 0.15 ? ("good" as const) : paymentRatio < 0.25 ? ("warn" as const) : ("bad" as const),
     },
     {
-      label: "Payment as % of Monthly Income",
+      label: "Payment as % of Income",
       value: `${(paymentRatio * 100).toFixed(0)}%`,
       flag:
         paymentRatio < 0.15 ? ("good" as const) : paymentRatio < 0.25 ? ("warn" as const) : ("bad" as const),
@@ -402,11 +404,11 @@ export function computeVerdict(inputs: Inputs): Verdict {
   let headline: string;
   let summary: string;
 
-  if (inputs.partnerSalary === 0 || combinedIncome === 0) {
+  if (inputs.expectedPostGradSalary === 0 || combinedIncome === 0) {
     score = "yellow";
     headline = "Enter salary estimates to get a verdict";
     summary =
-      "Fill in your income and your partner's expected OD salary to receive a personalized financial assessment.";
+      "Fill in expected post-graduation salary and current income to receive a personalized financial assessment.";
   } else if (dti <= 2 && loanToIncome <= 1.5 && paymentRatio <= 0.15) {
     score = "green";
     headline = "Financially Viable — Manageable with Discipline";

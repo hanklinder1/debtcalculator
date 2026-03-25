@@ -27,10 +27,10 @@ export default function NumberInput({
 }: NumberInputProps) {
   return (
     <div className="space-y-1.5">
-      <label className="block text-sm font-medium text-slate-700">{label}</label>
+      <label className="block text-xs font-medium text-neutral-500">{label}</label>
       <div className="relative flex items-center">
         {prefix && (
-          <span className="absolute left-3 text-slate-400 text-sm select-none">{prefix}</span>
+          <span className="absolute left-3 text-neutral-400 text-sm select-none">{prefix}</span>
         )}
         <input
           type="number"
@@ -43,16 +43,16 @@ export default function NumberInput({
           min={min}
           max={max}
           step={step}
-          className={`w-full rounded-lg bg-white border border-slate-300 text-slate-900 text-sm py-2.5
+          className={`w-full rounded-lg bg-neutral-50 border border-neutral-200 text-neutral-900 text-sm py-2.5
             ${prefix ? "pl-7" : "pl-3"} ${suffix ? "pr-12" : "pr-3"}
-            focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100
-            placeholder:text-slate-400 shadow-sm`}
+            focus:outline-none focus:border-neutral-900 focus:ring-1 focus:ring-neutral-900
+            placeholder:text-neutral-300 transition-colors`}
         />
         {suffix && (
-          <span className="absolute right-3 text-slate-400 text-sm select-none">{suffix}</span>
+          <span className="absolute right-3 text-neutral-400 text-sm select-none">{suffix}</span>
         )}
       </div>
-      {hint && <p className="text-xs text-slate-400">{hint}</p>}
+      {hint && <p className="text-xs text-neutral-400">{hint}</p>}
     </div>
   );
 }

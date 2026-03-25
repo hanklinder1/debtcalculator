@@ -24,8 +24,8 @@ export default function SliderInput({
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center">
-        <label className="text-sm font-medium text-slate-700">{label}</label>
-        <span className="text-sm font-semibold text-indigo-600 tabular-nums">{format(value)}</span>
+        <label className="text-xs font-medium text-neutral-500">{label}</label>
+        <span className="text-sm font-semibold text-neutral-900 tabular-nums">{format(value)}</span>
       </div>
       <input
         type="range"
@@ -36,11 +36,11 @@ export default function SliderInput({
         onChange={(e) => onChange(parseFloat(e.target.value))}
         className="w-full"
       />
-      <div className="flex justify-between text-xs text-slate-400">
+      <div className="flex justify-between text-xs text-neutral-300">
         <span>{format(min)}</span>
         <span>{format(max)}</span>
       </div>
-      {hint && <p className="text-xs text-slate-400">{hint}</p>}
+      {hint && <p className="text-xs text-neutral-400">{hint}</p>}
     </div>
   );
 }
