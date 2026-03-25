@@ -8,8 +8,8 @@ interface Section {
 
 function SectionBlock({ title, icon, content }: Section) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
-      <div className="px-5 py-4 border-b border-slate-100 flex items-center gap-3 bg-slate-50">
+    <div className="rounded-xl border border-slate-300 bg-slate-50 shadow-sm overflow-hidden">
+      <div className="px-5 py-4 border-b border-slate-200 flex items-center gap-3 bg-slate-100">
         <span className="text-xl">{icon}</span>
         <h3 className="font-semibold text-slate-800">{title}</h3>
       </div>
@@ -155,7 +155,7 @@ export default function ContextPage() {
                   body: "Your own savings + your partner's income contributions can meaningfully reduce how much you borrow. Even $20k–$40k pre-saved creates a real dent.",
                 },
               ].map((item, i) => (
-                <div key={i} className="rounded-lg bg-slate-50 border border-slate-200 p-3">
+                <div key={i} className="rounded-lg bg-white border border-slate-200 p-3">
                   <p className="font-medium text-slate-800 text-xs mb-1">{item.title}</p>
                   <p className="text-xs text-slate-500">{item.body}</p>
                 </div>
@@ -197,7 +197,7 @@ export default function ContextPage() {
                 benchmark: "Usually argues AGAINST long delays",
               },
             ].map((item, i) => (
-              <div key={i} className="rounded-lg bg-slate-50 border border-slate-200 p-3 space-y-1">
+              <div key={i} className="rounded-lg bg-white border border-slate-200 p-3 space-y-1">
                 <p className="font-semibold text-slate-800 text-sm">{item.metric}</p>
                 <p className="text-xs text-slate-500">{item.explain}</p>
                 <p className="text-xs text-indigo-600 font-medium">{item.benchmark}</p>
@@ -219,7 +219,7 @@ export default function ContextPage() {
                 { label: "Avg OD Mid-Career", value: "$130,000–$160,000", note: "5–10 years experience" },
                 { label: "OD Practice Owner", value: "$150,000–$250,000+", note: "Highly variable" },
               ].map((s, i) => (
-                <div key={i} className="rounded-lg bg-slate-50 border border-slate-200 p-3 text-center">
+                <div key={i} className="rounded-lg bg-white border border-slate-200 p-3 text-center">
                   <p className="text-lg font-bold text-indigo-600">{s.value}</p>
                   <p className="text-sm font-medium text-slate-700">{s.label}</p>
                   <p className="text-xs text-slate-400 mt-0.5">{s.note}</p>
@@ -303,7 +303,7 @@ export default function ContextPage() {
             <p className="text-slate-700 font-medium">
               Here&apos;s a realistic example you can enter into the calculator to see how the numbers work:
             </p>
-            <div className="rounded-lg bg-slate-50 border border-slate-200 p-4 space-y-2 font-mono text-xs">
+            <div className="rounded-lg bg-white border border-slate-300 p-4 space-y-2 font-mono text-xs">
               <p className="text-slate-700 font-sans font-semibold mb-2">Inputs:</p>
               <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 text-slate-500">
                 <span>Your income (debt-free):</span> <span className="text-indigo-600 font-semibold">$65,000/yr</span>
@@ -335,7 +335,7 @@ export default function ContextPage() {
       />
 
       {/* Disclaimer */}
-      <div className="rounded-lg border border-slate-200 bg-white p-4">
+      <div className="rounded-lg border border-slate-300 bg-slate-100 p-4">
         <p className="text-xs text-slate-400 leading-relaxed">
           <strong className="text-slate-500">Disclaimer:</strong> This tool provides general financial
           education and estimates only. It does not constitute professional financial, tax, or legal advice.

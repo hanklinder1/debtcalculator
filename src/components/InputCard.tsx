@@ -9,11 +9,11 @@ interface InputCardProps {
 }
 
 const accents = {
-  indigo: "border-indigo-200 bg-indigo-50/60",
-  emerald: "border-emerald-200 bg-emerald-50/60",
-  amber: "border-amber-200 bg-amber-50/60",
-  rose: "border-rose-200 bg-rose-50/60",
-  sky: "border-sky-200 bg-sky-50/60",
+  indigo: "border-indigo-200 bg-indigo-50",
+  emerald: "border-emerald-200 bg-emerald-50",
+  amber: "border-amber-200 bg-amber-50",
+  rose: "border-rose-200 bg-rose-50",
+  sky: "border-sky-200 bg-sky-50",
 };
 
 const iconAccents = {

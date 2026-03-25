@@ -8,10 +8,10 @@ interface MetricBadgeProps {
 }
 
 const flagStyles = {
-  good: "border-emerald-200 bg-emerald-50 text-emerald-700",
-  warn: "border-amber-200 bg-amber-50 text-amber-700",
-  bad: "border-rose-200 bg-rose-50 text-rose-700",
-  neutral: "border-slate-200 bg-white text-slate-700",
+  good: "border-emerald-300 bg-emerald-50 text-emerald-800",
+  warn: "border-amber-300 bg-amber-50 text-amber-800",
+  bad: "border-rose-300 bg-rose-50 text-rose-800",
+  neutral: "border-slate-300 bg-slate-100 text-slate-700",
 };
 
 const flagIcons = {

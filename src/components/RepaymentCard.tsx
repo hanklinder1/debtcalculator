@@ -33,8 +33,8 @@ export default function RepaymentCard({
     <div
       className={`rounded-xl border transition-all shadow-sm overflow-hidden ${
         highlighted
-          ? "border-indigo-200 bg-indigo-50/50"
-          : "border-slate-200 bg-white"
+          ? "border-indigo-200 bg-indigo-50"
+          : "border-slate-300 bg-slate-50"
       }`}
     >
       <button
@@ -75,7 +75,7 @@ export default function RepaymentCard({
       </button>
 
       {open && (
-        <div className="px-4 pb-4 space-y-3 border-t border-slate-100 pt-3">
+        <div className="px-4 pb-4 space-y-3 border-t border-slate-200 pt-3">
           <p className="text-sm text-slate-600 leading-relaxed">{notes}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
