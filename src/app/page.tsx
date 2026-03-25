@@ -79,7 +79,7 @@ export default function Home() {
                 src="/hero.jpg"
                 alt="Couple planning finances together"
                 fill
-                className="object-cover object-[60%_center]"
+                className="object-cover object-[35%_center]"
                 priority
               />
             </div>
